@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaseNumbersWorker", "CaseNu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messages", "EventBus.Messages\EventBus.Messages.csproj", "{EB58A355-7C7C-43B0-8327-F6B9491963F9}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{33CA53FF-4F20-4F40-B055-8BCB290C0583}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EB58A355-7C7C-43B0-8327-F6B9491963F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB58A355-7C7C-43B0-8327-F6B9491963F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB58A355-7C7C-43B0-8327-F6B9491963F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33CA53FF-4F20-4F40-B055-8BCB290C0583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33CA53FF-4F20-4F40-B055-8BCB290C0583}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33CA53FF-4F20-4F40-B055-8BCB290C0583}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33CA53FF-4F20-4F40-B055-8BCB290C0583}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
