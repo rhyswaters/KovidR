@@ -1,6 +1,9 @@
 version: '3.4'
 
 services:
+  guessdb:
+    image: mongo
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
 
@@ -9,3 +12,13 @@ services:
     build:
       context: .
       dockerfile: Background Processes/CaseNumbersWorker/Dockerfile
+
+  guess.api:
+    image: ${DOCKER_REGISTRY-}guess
+    build:
+      context: .
+      dockerfile: Services/Guess/Guess.API/Dockerfile
+
+volumes:
+  mongo_data:
+

@@ -1,6 +1,14 @@
 version: '3.4'
 
 services:
+  guessdb:
+    container_name: guessdb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
   casenumbersworker:
     container_name: casenumbersworker
     restart: always
@@ -19,3 +27,15 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+
+  guess.api:
+    container_name: guess.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+      - "DatabaseSettings:ConnectionString=mongodb://guessdb:27017;DatabaseName=GuessDb"
+    ports:
+      - "8000:80"
+    depends_on:
+      - guessdb
+      - rabbitmq
