@@ -3,11 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.809.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaseNumbersWorker", "CaseNumbersWorker\CaseNumbersWorker.csproj", "{B32BCF3D-23BA-4CE2-921F-61BDC9C3FFC2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Background Processes", "Background Processes", "{CB698F47-640D-42EB-8E77-172B7BA7B5FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messages", "EventBus.Messages\EventBus.Messages.csproj", "{EB58A355-7C7C-43B0-8327-F6B9491963F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaseNumbersWorker", "Background Processes\CaseNumbersWorker\CaseNumbersWorker.csproj", "{5943EC5E-5D26-4D4C-AD4E-738F8296449B}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{33CA53FF-4F20-4F40-B055-8BCB290C0583}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Building Blocks", "Building Blocks", "{C7D0AB04-7BEC-4D3D-8130-9DF68D60A946}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messages", "Building Blocks\EventBus.Messages\EventBus.Messages.csproj", "{50B29887-E980-40F0-9BBF-72D5D44229AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{6949D7FE-7013-446A-9066-BE63CFDE752B}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3F23EEB2-106C-4BE8-AE0F-D230C3AAF720}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,23 +21,27 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B32BCF3D-23BA-4CE2-921F-61BDC9C3FFC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B32BCF3D-23BA-4CE2-921F-61BDC9C3FFC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B32BCF3D-23BA-4CE2-921F-61BDC9C3FFC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B32BCF3D-23BA-4CE2-921F-61BDC9C3FFC2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EB58A355-7C7C-43B0-8327-F6B9491963F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB58A355-7C7C-43B0-8327-F6B9491963F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB58A355-7C7C-43B0-8327-F6B9491963F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB58A355-7C7C-43B0-8327-F6B9491963F9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{33CA53FF-4F20-4F40-B055-8BCB290C0583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33CA53FF-4F20-4F40-B055-8BCB290C0583}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{33CA53FF-4F20-4F40-B055-8BCB290C0583}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{33CA53FF-4F20-4F40-B055-8BCB290C0583}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5943EC5E-5D26-4D4C-AD4E-738F8296449B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5943EC5E-5D26-4D4C-AD4E-738F8296449B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5943EC5E-5D26-4D4C-AD4E-738F8296449B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5943EC5E-5D26-4D4C-AD4E-738F8296449B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50B29887-E980-40F0-9BBF-72D5D44229AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50B29887-E980-40F0-9BBF-72D5D44229AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50B29887-E980-40F0-9BBF-72D5D44229AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50B29887-E980-40F0-9BBF-72D5D44229AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F23EEB2-106C-4BE8-AE0F-D230C3AAF720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F23EEB2-106C-4BE8-AE0F-D230C3AAF720}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F23EEB2-106C-4BE8-AE0F-D230C3AAF720}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F23EEB2-106C-4BE8-AE0F-D230C3AAF720}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {80239F60-87F6-4BDC-9FDB-DCD427ACBADE}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5943EC5E-5D26-4D4C-AD4E-738F8296449B} = {CB698F47-640D-42EB-8E77-172B7BA7B5FD}
+		{50B29887-E980-40F0-9BBF-72D5D44229AC} = {C7D0AB04-7BEC-4D3D-8130-9DF68D60A946}
 	EndGlobalSection
 EndGlobal

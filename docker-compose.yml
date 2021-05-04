@@ -1,7 +1,6 @@
 version: '3.4'
 
 services:
-
   rabbitmq:
     image: rabbitmq:3-management-alpine
 
@@ -9,4 +8,4 @@ services:
     image: ${DOCKER_REGISTRY-}casenumbersworker
     build:
       context: .
-      dockerfile: CaseNumbersWorker/Dockerfile
+      dockerfile: Background Processes/CaseNumbersWorker/Dockerfile

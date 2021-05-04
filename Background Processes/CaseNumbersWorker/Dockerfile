@@ -5,11 +5,11 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["CaseNumbersWorker/CaseNumbersWorker.csproj", "CaseNumbersWorker/"]
-COPY ["EventBus.Messages/EventBus.Messages.csproj", "EventBus.Messages/"]
-RUN dotnet restore "CaseNumbersWorker/CaseNumbersWorker.csproj"
+COPY ["Background Processes/CaseNumbersWorker/CaseNumbersWorker.csproj", "Background Processes/CaseNumbersWorker/"]
+COPY ["Building Blocks/EventBus.Messages/EventBus.Messages.csproj", "Building Blocks/EventBus.Messages/"]
+RUN dotnet restore "Background Processes/CaseNumbersWorker/CaseNumbersWorker.csproj"
 COPY . .
-WORKDIR "/src/CaseNumbersWorker"
+WORKDIR "/src/Background Processes/CaseNumbersWorker"
 RUN dotnet build "CaseNumbersWorker.csproj" -c Release -o /app/build
 
 FROM build AS publish
