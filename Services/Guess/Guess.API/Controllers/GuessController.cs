@@ -32,8 +32,8 @@ namespace Guess.API.Controllers
         public async Task<ActionResult<ResultsByDaysWonVm>> GetResultsByDaysWon(DateTime? from, DateTime? to)
         {
             var query = new GetResultsByDaysWonQuery(from, to);
-            var orders = await _mediator.Send(query);
-            return Ok(orders);
+            var results = await _mediator.Send(query);
+            return Ok(results);
         }
     }
 }

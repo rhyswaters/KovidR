@@ -3,17 +3,13 @@ using Guess.Domain.Entities;
 using MongoDB.Driver;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using Guess.Application.Models;
 
 namespace Guess.Infrastructure.Persistence
 {
     public class GuessContext : IGuessContext
     {
-        public DatabaseSettings _databaseSettings;
-
-        public GuessContext(IOptions<DatabaseSettings> databaseSettings, IConfiguration configuration)
+        public GuessContext(IConfiguration configuration)
         {
-            _databaseSettings = databaseSettings.Value;
             var client = new MongoClient(configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
             var database = client.GetDatabase(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
 

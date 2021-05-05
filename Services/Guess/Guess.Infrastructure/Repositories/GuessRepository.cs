@@ -31,7 +31,8 @@ namespace Guess.Infrastructure.Repositories
         {
             return await _context
                             .CaseNumbers
-                            .Find(p => p.Date > from && p.Date < to)
+                            .Find(p => true)
+                            //.Find(p => p.Date > from && p.Date < to)
                             .ToListAsync();
         }
 
@@ -39,7 +40,8 @@ namespace Guess.Infrastructure.Repositories
         {
             return await _context
                             .Guesses
-                            .Find(p => p.GuessDate > from && p.GuessDate < to)
+                            .Find(p => true)
+                            //.Find(p => p.GuessDate > from && p.GuessDate < to)
                             .ToListAsync();
         }
     }

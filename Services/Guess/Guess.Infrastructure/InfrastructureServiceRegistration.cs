@@ -1,5 +1,4 @@
 ﻿using Guess.Application.Contracts;
-using Guess.Application.Models;
 using Guess.Infrastructure.Persistence;
 using Guess.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
@@ -14,7 +13,6 @@ namespace Guess.Infrastructure
 
             services.AddScoped<IGuessRepository, GuessRepository>();
             services.AddScoped<IGuessContext, GuessContext>();
-            services.Configure<DatabaseSettings>(c => configuration.GetSection("DatabaseSettings"));
 
             return services;
         }
