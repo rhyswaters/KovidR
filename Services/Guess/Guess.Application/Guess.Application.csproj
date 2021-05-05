@@ -17,6 +17,12 @@
     <Folder Include="Features\Guesses\" />
     <Folder Include="Features\Guesses\Commands\" />
     <Folder Include="Exceptions\" />
+    <Folder Include="Features\Guesses\Commands\CreateGuess\" />
+    <Folder Include="Features\CaseNumbers\" />
+    <Folder Include="Features\CaseNumbers\Commands\" />
+    <Folder Include="Features\CaseNumbers\Commands\CreateCaseNumbers\" />
+    <Folder Include="Features\Results\Queries\GetResultsByDaysWon\" />
+    <Folder Include="Features\Results\Queries\GetResultsByCumulativeTotals\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />

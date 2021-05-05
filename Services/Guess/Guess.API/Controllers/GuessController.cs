@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using Guess.Application.Features.Guesses.Commands;
-using Guess.Application.Features.Results.Queries;
+using Guess.Application.Features.Guesses.Commands.CreateGuess;
+using Guess.Application.Features.Results.GetResultsByCumulativeTotals.Queries;
+using Guess.Application.Features.Results.GetResultsByDaysWon.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,11 +28,20 @@ namespace Guess.API.Controllers
             return Ok();
         }
 
-        [HttpGet(Name = "GetResultsByDaysWon")]
+        [HttpGet("GetResultsByDaysWon")]
         [ProducesResponseType(typeof(ResultsByDaysWonVm), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ResultsByDaysWonVm>> GetResultsByDaysWon(DateTime? from, DateTime? to)
         {
             var query = new GetResultsByDaysWonQuery(from, to);
+            var results = await _mediator.Send(query);
+            return Ok(results);
+        }
+
+        [HttpGet("GetResultsByCumulativeTotals")]
+        [ProducesResponseType(typeof(ResultsByDaysWonVm), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ResultsByDaysWonVm>> GetResultsByCumulativeTotals(DateTime? from, DateTime? to)
+        {
+            var query = new GetResultsByCumulativeTotalsQuery(from, to);
             var results = await _mediator.Send(query);
             return Ok(results);
         }

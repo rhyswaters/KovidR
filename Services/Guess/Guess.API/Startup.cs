@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EventBus.Messages.Common;
+using Guess.API.EventBusConsumer;
 using Guess.Application;
 using Guess.Infrastructure;
 using MassTransit;
@@ -36,7 +37,7 @@ namespace Guess.API
 
             services.AddMassTransit(config =>
             {
-                //config.AddConsumer<BasketCheckoutConsumer>();
+                config.AddConsumer<CaseNumbersPublishedConsumer>();
 
                 config.UsingRabbitMq((ctx, cfg) =>
                 {
@@ -44,7 +45,7 @@ namespace Guess.API
 
                     cfg.ReceiveEndpoint(EventBusConstants.CaseNumbersPublishedQueue, c =>
                     {
-                        //c.ConfigureConsumer<BasketCheckoutConsumer>(ctx);
+                        c.ConfigureConsumer<CaseNumbersPublishedConsumer>(ctx);
                     });
                 });
             });

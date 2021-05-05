@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace Guess.Application.Features.Guesses.Commands
+namespace Guess.Application.Features.Guesses.Commands.CreateGuess
 {
     public class CreateGuessCommand : IRequest
     {

@@ -7,7 +7,7 @@ using Guess.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Guess.Application.Features.Guesses.Commands
+namespace Guess.Application.Features.Guesses.Commands.CreateGuess
 {
     public class CreateGuessCommandHandler : IRequestHandler<CreateGuessCommand>
     {

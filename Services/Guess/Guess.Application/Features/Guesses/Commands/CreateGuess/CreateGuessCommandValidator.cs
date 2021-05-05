@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentValidation;
 
-namespace Guess.Application.Features.Guesses.Commands
+namespace Guess.Application.Features.Guesses.Commands.CreateGuess
 {
     public class CreateGuessCommandValidator : AbstractValidator<CreateGuessCommand>
     {
