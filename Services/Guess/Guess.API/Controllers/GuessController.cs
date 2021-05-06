@@ -5,6 +5,7 @@ using Guess.Application.Features.Guesses.Commands.CreateGuess;
 using Guess.Application.Features.Results.GetResultsByCumulativeTotals.Queries;
 using Guess.Application.Features.Results.GetResultsByDaysWon.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Guess.API.Controllers
@@ -21,6 +22,7 @@ namespace Guess.API.Controllers
         }
 
         [HttpPost]
+        //[Authorize("write:guesses")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult> CreateGuess([FromBody] CreateGuessCommand command)
         {
@@ -29,6 +31,7 @@ namespace Guess.API.Controllers
         }
 
         [HttpGet("GetResultsByDaysWon")]
+        //[Authorize("read:guesses")]
         [ProducesResponseType(typeof(ResultsByDaysWonVm), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ResultsByDaysWonVm>> GetResultsByDaysWon(DateTime? from, DateTime? to)
         {
@@ -38,6 +41,7 @@ namespace Guess.API.Controllers
         }
 
         [HttpGet("GetResultsByCumulativeTotals")]
+        //[Authorize("read:guesses")]
         [ProducesResponseType(typeof(ResultsByDaysWonVm), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ResultsByDaysWonVm>> GetResultsByCumulativeTotals(DateTime? from, DateTime? to)
         {

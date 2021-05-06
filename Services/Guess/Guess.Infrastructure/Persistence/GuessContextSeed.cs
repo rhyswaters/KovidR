@@ -15,12 +15,12 @@ namespace Guess.Infrastructure.Persistence
             if (!existGuess)
             {
                 var seedDictionary = new Dictionary<string, int[]>();
-                var latestGuess = DateTime.Parse("05/05/2021").Date;
+                var latestGuess = DateTime.Parse("06/05/2021").Date;
 
-                seedDictionary.Add("Rhys", new int[] { 481, 435, 457, 444, 466, 490, 425, 505, 420, 350, 444 });
-                seedDictionary.Add("Marius", new int[] { -1, 450, 404, 425, -1, 581, 404, 444, 460, 333, 422 });
-                seedDictionary.Add("Remco", new int[] { 404, 465, 505, 459, 404, 505, 455, 404, 404, 404, 466 });
-                seedDictionary.Add("Covid", new int[] { -1, 383, 453, 402, 569, 545, 475, 371, 426, 437, 461 });
+                seedDictionary.Add("Rhys", new int[] { 455, 481, 435, 457, 444, 466, 490, 425, 505, 420, 350, 444 });
+                seedDictionary.Add("Marius", new int[] { 404, 380, 450, 404, 425, -1, 581, 404, 444, 460, 333, 422 });
+                seedDictionary.Add("Remco", new int[] { 350, 404, 465, 505, 459, 404, 505, 455, 404, 404, 404, 466 });
+                seedDictionary.Add("Covid", new int[] { 481, 383, 453, 402, 569, 545, 475, 371, 426, 437, 461 });
 
                 guessesCollection.InsertManyAsync(GetExistingGuesses(seedDictionary, latestGuess));
                 caseNumbersCollection.InsertManyAsync(GetExistingCaseNumbers(seedDictionary, latestGuess));
