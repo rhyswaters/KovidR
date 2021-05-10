@@ -15,19 +15,19 @@ namespace Guess.Infrastructure.Persistence
             if (!existGuess)
             {
                 var seedDictionary = new Dictionary<string, int[]>();
-                var latestGuess = DateTime.Parse("06/05/2021").Date;
+                var firstGuess = new DateTime(2021, 4, 25).Date;
 
-                seedDictionary.Add("Rhys", new int[] { 455, 481, 435, 457, 444, 466, 490, 425, 505, 420, 350, 444 });
-                seedDictionary.Add("Marius", new int[] { 404, 380, 450, 404, 425, -1, 581, 404, 444, 460, 333, 422 });
-                seedDictionary.Add("Remco", new int[] { 350, 404, 465, 505, 459, 404, 505, 455, 404, 404, 404, 466 });
-                seedDictionary.Add("Covid", new int[] { 481, 383, 453, 402, 569, 545, 475, 371, 426, 437, 461 });
+                seedDictionary.Add("Rhys",   new int[] { 444, 350, 420, 505, 425, 490, 466, 444, 457, 435, 481, 455, -1, -1, 350, 344 });
+                seedDictionary.Add("Marius", new int[] { 422, 333, 460, 444, 404, 581, -1, 425, 404, 450, 380, 404, -1, -1, 419, 434 });
+                seedDictionary.Add("Remco",  new int[] { 466, 404, 404, 404, 455, 505, 404, 459, 505, 465, 404, 350, -1, -1, 404, 404 });
+                seedDictionary.Add("Covid",  new int[] { 461, 437, 426, 371, 475, 545, 569, 402, 453, 383, 418, 393, 434, 408, 514 });
 
-                guessesCollection.InsertManyAsync(GetExistingGuesses(seedDictionary, latestGuess));
-                caseNumbersCollection.InsertManyAsync(GetExistingCaseNumbers(seedDictionary, latestGuess));
+                guessesCollection.InsertManyAsync(GetExistingGuesses(seedDictionary, firstGuess));
+                caseNumbersCollection.InsertManyAsync(GetExistingCaseNumbers(seedDictionary, firstGuess));
             }
         }
 
-        private static IEnumerable<UserGuess> GetExistingGuesses(Dictionary<string, int[]> seedDictionary, DateTime latestGuessDate)
+        private static IEnumerable<UserGuess> GetExistingGuesses(Dictionary<string, int[]> seedDictionary, DateTime firstGuessDate)
         {
             var guesses = new List<UserGuess>();
 
@@ -43,18 +43,18 @@ namespace Guess.Infrastructure.Persistence
                         {
                             UserName = entry.Key,
                             TotalCases = caseNumbers,
-                            GuessDate = latestGuessDate.AddDays(i)
+                            GuessDate = firstGuessDate.AddDays(i)
                         });
                     }
 
-                    i--;
+                    i++;
                 }
             }
 
             return guesses;
         }
 
-        private static IEnumerable<CaseNumbers> GetExistingCaseNumbers(Dictionary<string, int[]> seedDictionary, DateTime latestGuessDate)
+        private static IEnumerable<CaseNumbers> GetExistingCaseNumbers(Dictionary<string, int[]> seedDictionary, DateTime firstGuessDate)
         {
             var caseNumbers = new List<CaseNumbers>();
 
@@ -69,11 +69,11 @@ namespace Guess.Infrastructure.Persistence
                         caseNumbers.Add(new CaseNumbers()
                         {
                             TotalCases = num,
-                            Date = latestGuessDate.AddDays(i)
+                            Date = firstGuessDate.AddDays(i)
                         });
                     }
 
-                    i--;
+                    i++;
                 }
             }
 

@@ -35,6 +35,13 @@ namespace Guess.Application.Features.Results.GetResultsByDaysWon.Queries
             foreach(var entry in caseNumbersList)
             {
                 var guessesForDay = guessesList.Where(g => g.GuessDate == entry.Date);
+
+                if(!guessesForDay.Any())
+                {
+                    //we all forgot to guess
+                    continue;
+                }
+
                 var caseNumbersOfGuesses = guessesForDay.Select(x => x.TotalCases);
                 int closestGuess = caseNumbersOfGuesses.Aggregate((x, y) => Math.Abs(x - entry.TotalCases) < Math.Abs(y - entry.TotalCases) ? x : y);
 
@@ -45,7 +52,7 @@ namespace Guess.Application.Features.Results.GetResultsByDaysWon.Queries
                 {
                     resultsDictionary[winner.UserName]++;
                 }
-            }
+            } 
 
             var vm = new ResultsByDaysWonVm();
             vm.DaysWon = resultsDictionary;

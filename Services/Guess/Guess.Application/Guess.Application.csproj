@@ -23,6 +23,9 @@
     <Folder Include="Features\CaseNumbers\Commands\CreateCaseNumbers\" />
     <Folder Include="Features\Results\Queries\GetResultsByDaysWon\" />
     <Folder Include="Features\Results\Queries\GetResultsByCumulativeTotals\" />
+    <Folder Include="Features\Results\Queries\GetResultsList\" />
+    <Folder Include="Features\Guesses\Queries\" />
+    <Folder Include="Features\Guesses\Queries\HasUserSubmittedNextGuess\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />

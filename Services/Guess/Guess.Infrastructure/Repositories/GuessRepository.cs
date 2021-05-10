@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Guess.Application.Contracts;
 using Guess.Domain.Entities;
@@ -29,19 +30,35 @@ namespace Guess.Infrastructure.Repositories
 
         public async Task<IEnumerable<CaseNumbers>> GetCaseNumbers(DateTime? from, DateTime? to)
         {
+            Expression<Func<CaseNumbers, bool>> predicate = x => true;
+
+            if (from.HasValue && to.HasValue)
+                predicate = x => x.Date >= from && x.Date <= to;
+            else if (from.HasValue)
+                predicate = x => x.Date >= from;
+            else if (to.HasValue)
+                predicate = x => x.Date <= to;
+
             return await _context
                             .CaseNumbers
-                            .Find(p => true)
-                            //.Find(p => p.Date > from && p.Date < to)
+                            .Find(predicate)
                             .ToListAsync();
         }
 
         public async Task<IEnumerable<UserGuess>> GetGuesses(DateTime? from, DateTime? to)
         {
+            Expression<Func<UserGuess, bool>> predicate = x => true;
+
+            if (from.HasValue && to.HasValue)
+                predicate = x => x.GuessDate >= from && x.GuessDate <= to;
+            else if (from.HasValue)
+                predicate = x => x.GuessDate >= from;
+            else if (to.HasValue)
+                predicate = x => x.GuessDate <= to;
+
             return await _context
                             .Guesses
-                            .Find(p => true)
-                            //.Find(p => p.GuessDate > from && p.GuessDate < to)
+                            .Find(predicate)
                             .ToListAsync();
         }
     }

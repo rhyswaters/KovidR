@@ -119,13 +119,13 @@ namespace CaseNumbersWorker.Services
         //try not to spam the arcgis server too often when we start polling at 2pm as it's unlikely cases will be released until 6pm on most days
         private int GetWaitTime(DateTime currentTime)
         {
-            var hour = currentTime.Hour;
+            var hour = currentTime.ToLocalTime().Hour;
             var oneMinute = 60000;
 
-            if (hour > 17)
-                return oneMinute;
             if (hour > 16)
-                return oneMinute * 5;
+                return oneMinute;
+            if (hour > 15)
+                return oneMinute * 3;
 
             return oneMinute * 10;
         }
