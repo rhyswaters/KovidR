@@ -24,16 +24,6 @@ namespace CaseNumbersWorker
 
         public IServiceProvider Services { get; }
 
-        /*public Task StartAsync(CancellationToken stoppingToken)
-        {
-            _logger.LogInformation("Timed Hosted Service running.");
-
-            _timer = new Timer(DoWork, null, TimeSpan.Zero,
-                TimeSpan.FromHours(24));
-
-            return Task.CompletedTask;
-        }*/
-
         public Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Timed Hosted Service running.");

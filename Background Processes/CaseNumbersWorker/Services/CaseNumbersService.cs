@@ -124,9 +124,9 @@ namespace CaseNumbersWorker.Services
             var hour = currentTime.ToLocalTime().Hour;
             var oneMinute = 60000;
 
-            if (hour > 16)
+            if (hour >= 16)
                 return oneMinute;
-            if (hour > 15)
+            if (hour >= 15)
                 return oneMinute * 3;
 
             return oneMinute * 10;
