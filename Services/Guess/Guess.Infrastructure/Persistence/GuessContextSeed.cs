@@ -17,10 +17,10 @@ namespace Guess.Infrastructure.Persistence
                 var seedDictionary = new Dictionary<string, int[]>();
                 var firstGuess = new DateTime(2021, 4, 25).Date;
 
-                seedDictionary.Add("Rhys",   new int[] { 444, 350, 420, 505, 425, 490, 466, 444, 457, 435, 481, 455, -1, -1, 350, 344 });
-                seedDictionary.Add("Marius", new int[] { 422, 333, 460, 444, 404, 581, -1, 425, 404, 450, 380, 404, -1, -1, 419, 434 });
-                seedDictionary.Add("Remco",  new int[] { 466, 404, 404, 404, 455, 505, 404, 459, 505, 465, 404, 350, -1, -1, 404, 404 });
-                seedDictionary.Add("Covid",  new int[] { 461, 437, 426, 371, 475, 545, 569, 402, 453, 383, 418, 393, 434, 408, 514 });
+                seedDictionary.Add("Rhys",   new int[] { 444, 350, 420, 505, 425, 490, 466, 444, 457, 435, 481, 455,  -1,  -1, 350, 344, 375, 435, 476 });
+                seedDictionary.Add("Marius", new int[] { 422, 333, 460, 444, 404, 581,  -1, 425, 404, 450, 380, 404,  -1,  -1, 419, 434, 419, 375, 414 });
+                seedDictionary.Add("Remco",  new int[] { 466, 404, 404, 404, 455, 505, 404, 459, 505, 465, 404, 350,  -1,  -1, 404, 404, 404, 390 });
+                seedDictionary.Add("Covid",  new int[] { 461, 437, 426, 371, 475, 545, 569, 402, 453, 383, 418, 393, 434, 408, 514, 381, 379, 448 });
 
                 guessesCollection.InsertManyAsync(GetExistingGuesses(seedDictionary, firstGuess));
                 caseNumbersCollection.InsertManyAsync(GetExistingCaseNumbers(seedDictionary, firstGuess));

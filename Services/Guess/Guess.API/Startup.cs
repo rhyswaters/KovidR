@@ -43,20 +43,20 @@ namespace Guess.API
             {
                 options.Authority = domain;
                 options.Audience = Configuration["Auth0:Audience"];
-                // If the access token does not have a `sub` claim, `User.Identity.Name` will be `null`. Map it to a different claim by setting the NameClaimType below.
+                // map custom claim added in auth0 rule to User.Identity.Name
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    NameClaimType = ClaimTypes.NameIdentifier
+                    NameClaimType = "http://kovidr.ie/userName"
                 };
             });
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("read:guesses", policy => policy.Requirements.Add(new HasScopeRequirement("read:guesses", domain)));
-                options.AddPolicy("write:guesses", policy => policy.Requirements.Add(new HasScopeRequirement("write:guesses", domain)));
+                options.AddPolicy("read:guesses", policy => policy.Requirements.Add(new HasPermissionRequirement("read:guesses", domain)));
+                options.AddPolicy("write:guesses", policy => policy.Requirements.Add(new HasPermissionRequirement("write:guesses", domain)));
             });
 
-            services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
+            services.AddSingleton<IAuthorizationHandler, HasPermissionHandler>();
 
             //dependent projects configuration
             services.AddApplicationServices();

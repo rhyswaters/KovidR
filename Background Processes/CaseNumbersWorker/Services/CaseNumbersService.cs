@@ -36,7 +36,7 @@ namespace CaseNumbersWorker.Services
                 Thread.Sleep(timeToWait);
             }
 
-            int count = 0;
+            int count = 1;
 
             var baseUrl = "https://services1.arcgis.com/eNO7HHeQ3rUcBllm/arcgis/rest/services/";
 
@@ -55,9 +55,11 @@ namespace CaseNumbersWorker.Services
                     await CreateCaseNumbersPublishedEvent(baseUrl + casesUrl, client);
                     return;
                 }
-                else Thread.Sleep(GetWaitTime(DateTime.Now));
-
-                _logger.LogInformation($"PublishCaseNumbers executed {count++} times");
+                else
+                {
+                    _logger.LogInformation($"PublishCaseNumbers executed {count++} times");
+                    Thread.Sleep(GetWaitTime(DateTime.Now));
+                }
             }
         }
 

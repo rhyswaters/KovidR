@@ -22,7 +22,7 @@ namespace Guess.Application.Features.Results.Queries.GetResultsList
         public async Task<IEnumerable<ResultsListVm>> Handle(GetResultsListQuery request, CancellationToken cancellationToken)
         {
             var dateTo = DateTime.Now.Date;
-            var dateFrom = DateTime.Now.AddDays(-request.NumberOfDaysToFetch + 1).Date;
+            var dateFrom = DateTime.Now.AddDays(-request.NumberOfDaysToFetch).Date;
 
             var guessesList = await _guessRepository.GetGuesses(dateFrom, dateTo);
             var caseNumbersList = await _guessRepository.GetCaseNumbers(dateFrom, dateTo);
@@ -43,7 +43,7 @@ namespace Guess.Application.Features.Results.Queries.GetResultsList
                 }) ;
             }
 
-            return resultListVmList.OrderByDescending(x=> x.Date);
+            return resultListVmList.OrderByDescending(x=> x.Date).Take(request.NumberOfDaysToFetch);
         }
 
         private KeyValuePair<string, int?> CalculateResults(int caseNumbers, List<UserGuess> guesses)

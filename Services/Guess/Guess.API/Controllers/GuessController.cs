@@ -26,17 +26,18 @@ namespace Guess.API.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [HttpPost]
-        //[Authorize("write:guesses")]
+        [HttpPost("CreateGuess")]
+        [Authorize("write:guesses")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult> CreateGuess([FromBody] CreateGuessCommand command)
         {
+            command.UserName = HttpContext.User.Identity.Name;
             await _mediator.Send(command);
             return Ok();
         }
         
         [HttpGet("GetResultsByDaysWon")]
-        //[Authorize("read:guesses")]
+        [Authorize("read:guesses")]
         [ProducesResponseType(typeof(ResultsByDaysWonVm), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ResultsByDaysWonVm>> GetResultsByDaysWon(DateTime? from, DateTime? to)
         {
@@ -46,7 +47,7 @@ namespace Guess.API.Controllers
         }
 
         [HttpGet("GetResultsByCumulativeTotals")]
-        //[Authorize("read:guesses")]
+        [Authorize("read:guesses")]
         [ProducesResponseType(typeof(ResultsByDaysWonVm), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ResultsByDaysWonVm>> GetResultsByCumulativeTotals(DateTime? from, DateTime? to)
         {
@@ -56,7 +57,7 @@ namespace Guess.API.Controllers
         }
 
         [HttpGet("GetResultsList/{numResultsToFetch}")]
-        //[Authorize("read:guesses")]
+        [Authorize("read:guesses")]
         [ProducesResponseType(typeof(IEnumerable<ResultsListVm>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<ResultsListVm>>> GetResultsList(int numResultsToFetch)
         {
@@ -65,12 +66,12 @@ namespace Guess.API.Controllers
             return Ok(results);
         }
 
-        [HttpGet("HasUserSubmittedNextGuess/{userName}")]
-        //[Authorize("read:guesses")]
+        [HttpGet("HasUserSubmittedNextGuess")]
+        [Authorize("read:guesses")]
         [ProducesResponseType(typeof(HasUserSubmittedNextGuessVm), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<HasUserSubmittedNextGuessVm>> HasUserSubmittedNextGuess(string userName)
+        public async Task<ActionResult<HasUserSubmittedNextGuessVm>> HasUserSubmittedNextGuess()
         {
-            var query = new HasUserSubmittedNextGuessQuery(userName);
+            var query = new HasUserSubmittedNextGuessQuery(HttpContext.User.Identity.Name);
             var results = await _mediator.Send(query);
             return Ok(results);
         }
