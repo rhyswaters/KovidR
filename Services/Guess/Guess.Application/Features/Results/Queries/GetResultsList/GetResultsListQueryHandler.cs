@@ -30,7 +30,7 @@ namespace Guess.Application.Features.Results.Queries.GetResultsList
 
             foreach(var result in caseNumbersList)
             {
-                var guessesForDay = guessesList.Where(x => x.GuessDate.Date == result.Date).ToList();
+                var guessesForDay = guessesList.Where(x => x.GuessDate.Date == result.Date.Date).ToList();
                 var resultsForDay = CalculateResults(result.TotalCases, guessesForDay);
 
                 resultListVmList.Add(new ResultsListVm()

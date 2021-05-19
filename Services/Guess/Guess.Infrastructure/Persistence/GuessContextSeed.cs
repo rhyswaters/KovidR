@@ -15,7 +15,7 @@ namespace Guess.Infrastructure.Persistence
             if (!existGuess)
             {
                 var seedDictionary = new Dictionary<string, int[]>();
-                var firstGuess = new DateTime(2021, 4, 25).Date;
+                var firstGuess = new DateTime(2021, 4, 25).Date.AddHours(12);
 
                 seedDictionary.Add("Rhys",   new int[] { 444, 350, 420, 505, 425, 490, 466, 444, 457, 435, 481, 455,  -1,  -1, 350, 344, 375, 435, 476, 399, 378,  -1, 415, 419, 401 });
                 seedDictionary.Add("Marius", new int[] { 422, 333, 460, 444, 404, 581,  -1, 425, 404, 450, 380, 404,  -1,  -1, 419, 434, 419, 375, 414, 440, 429,  -1, 385, 370, 375 });
