@@ -21,8 +21,8 @@ namespace Guess.Application.Features.Results.Queries.GetResultsList
 
         public async Task<IEnumerable<ResultsListVm>> Handle(GetResultsListQuery request, CancellationToken cancellationToken)
         {
-            var dateTo = DateTime.Now.Date;
-            var dateFrom = DateTime.Now.AddDays(-request.NumberOfDaysToFetch).Date;
+            var dateTo = DateTime.Now.Date.AddHours(13);
+            var dateFrom = DateTime.Now.AddDays(-request.NumberOfDaysToFetch).Date.AddHours(12);
 
             var guessesList = await _guessRepository.GetGuesses(dateFrom, dateTo);
             var caseNumbersList = await _guessRepository.GetCaseNumbers(dateFrom, dateTo);
