@@ -81,6 +81,7 @@ namespace Guess.API
             services.AddScoped<CaseNumbersPublishedConsumer>();
 
             //general configuration
+            services.AddHealthChecks();
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -123,6 +124,7 @@ namespace Guess.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
         }
     }
