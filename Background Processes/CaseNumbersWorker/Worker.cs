@@ -28,30 +28,8 @@ namespace CaseNumbersWorker
         {
             _logger.LogInformation("Timed Hosted Service running.");
 
-            TimeSpan interval = TimeSpan.FromHours(24);
-
-            //always run immediately on startup no matter what time of day before scheduling to run at 2pm tomorrow and every day thereafter
             DoWork(null);
 
-            var nextRunTime = DateTime.Today.AddDays(1).AddHours(14);
-            var curTime = DateTime.Now;
-            var firstInterval = nextRunTime.Subtract(curTime);
-
-            Action action = () =>
-            {
-                var t1 = Task.Delay(firstInterval);
-                t1.Wait();
-                DoWork(null);
-
-                _timer = new Timer(
-                    DoWork,
-                    null,
-                    TimeSpan.Zero,
-                    interval
-                );
-            };
-
-            Task.Run(action);
             return Task.CompletedTask;
         }
 

@@ -24,7 +24,7 @@ namespace CaseNumbersWorker
                     IConfiguration configuration = hostContext.Configuration;
 
                     services.AddHostedService<Worker>();
-                    services.AddScoped<ICaseNumbersService, CaseNumbersService>();
+                    services.AddScoped<ICaseNumbersService, TwitterCaseNumbersService>();
                     services.AddHttpClient();
 
                     services.AddMassTransit(config =>
