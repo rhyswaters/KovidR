@@ -28,7 +28,15 @@ namespace Guess.Application.Features.Results.Queries.GetResultsList
             var caseNumbersList = await _guessRepository.GetCaseNumbers(dateFrom, dateTo);
             var resultListVmList = new List<ResultsListVm>();
 
-            foreach(var result in caseNumbersList)
+            //below scenario shoudl only happen in dev
+            if (caseNumbersList.Count() == 0)
+            {
+                caseNumbersList = await _guessRepository.GetCaseNumbers(null, null);
+                caseNumbersList = caseNumbersList.OrderByDescending(x => x.Date).Take(request.NumberOfDaysToFetch);
+                guessesList = await _guessRepository.GetGuesses(null, null);
+            }
+
+            foreach (var result in caseNumbersList)
             {
                 var guessesForDay = guessesList.Where(x => x.GuessDate.Date == result.Date.Date).ToList();
                 var resultsForDay = CalculateResults(result.TotalCases, guessesForDay);

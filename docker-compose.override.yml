@@ -1,6 +1,15 @@
 version: '3.4'
 
 services:
+  signal:
+    container_name: signal
+    environment:
+      - USE_NATIVE=0
+    ports:
+      - "8080:8080" #map docker port 8080 to host port 8080.
+    volumes:
+      - ./signal-cli-config:/home/.local/share/signal-cli #map "signal-cli-config" folder on host system into docker container. the folder contains the password and cryptographic keys when a new number is registered
+
   guessdb:
     container_name: guessdb
     restart: always
@@ -34,6 +43,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
       - "DatabaseSettings:ConnectionString=mongodb://guessdb:27017;DatabaseName=GuessDb"
+      - "MessagingSettings:SendNumber=+35315471763"
+      - "MessagingSettings:ConnectionString=http://signal:8080"
     ports:
       - "8000:80"
     depends_on:

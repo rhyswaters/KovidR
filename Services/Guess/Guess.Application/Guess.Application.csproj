@@ -26,6 +26,8 @@
     <Folder Include="Features\Results\Queries\GetResultsList\" />
     <Folder Include="Features\Guesses\Queries\" />
     <Folder Include="Features\Guesses\Queries\HasUserSubmittedNextGuess\" />
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />

@@ -34,7 +34,7 @@ namespace Guess.Application.Features.Results.GetResultsByDaysWon.Queries
 
             foreach(var entry in caseNumbersList)
             {
-                var guessesForDay = guessesList.Where(g => g.GuessDate == entry.Date);
+                var guessesForDay = guessesList.Where(g => g.GuessDate.Date == entry.Date.Date);
 
                 if(!guessesForDay.Any())
                 {

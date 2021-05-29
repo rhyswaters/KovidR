@@ -1,4 +1,6 @@
 ﻿using Guess.Application.Contracts;
+using Guess.Application.Infrastructure;
+using Guess.Infrastructure.Messaging;
 using Guess.Infrastructure.Persistence;
 using Guess.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +15,7 @@ namespace Guess.Infrastructure
 
             services.AddScoped<IGuessRepository, GuessRepository>();
             services.AddScoped<IGuessContext, GuessContext>();
+            services.AddScoped<IMessageService, SignalMessageService>();
 
             return services;
         }
