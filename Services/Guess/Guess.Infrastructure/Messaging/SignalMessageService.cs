@@ -12,7 +12,6 @@ namespace Guess.Infrastructure.Messaging
 {
     public class SignalMessageService : IMessageService
     {
-        private readonly IHttpClientFactory _clientFactory;
         private readonly IConfiguration _configuration;
         public ILogger<SignalMessageService> _logger { get; }
 

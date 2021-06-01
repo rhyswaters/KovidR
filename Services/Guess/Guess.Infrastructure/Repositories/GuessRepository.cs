@@ -20,11 +20,13 @@ namespace Guess.Infrastructure.Repositories
 
         public async Task CreateCaseNumbers(CaseNumbers caseNumbers)
         {
+            caseNumbers.TimeStamp = DateTime.Now;
             await _context.CaseNumbers.InsertOneAsync(caseNumbers);
         }
 
         public async Task CreateGuess(UserGuess guess)
         {
+            guess.TimeStamp = DateTime.Now;
             await _context.Guesses.InsertOneAsync(guess);
         }
 

@@ -66,6 +66,7 @@ namespace Guess.API
             services.AddMassTransit(config =>
             {
                 config.AddConsumer<CaseNumbersPublishedConsumer>();
+                config.AddConsumer<WorkerServiceStartedConsumer>();
 
                 config.UsingRabbitMq((ctx, cfg) =>
                 {
@@ -75,10 +76,16 @@ namespace Guess.API
                     {
                         c.ConfigureConsumer<CaseNumbersPublishedConsumer>(ctx);
                     });
+
+                    cfg.ReceiveEndpoint(EventBusConstants.WorkerServiceStartedQueue, c =>
+                    {
+                        c.ConfigureConsumer<WorkerServiceStartedConsumer>(ctx);
+                    });
                 });
             });
             services.AddMassTransitHostedService();
             services.AddScoped<CaseNumbersPublishedConsumer>();
+            services.AddScoped<WorkerServiceStartedConsumer>();
 
             //general configuration
             services.AddHealthChecks();

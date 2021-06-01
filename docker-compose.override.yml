@@ -42,9 +42,13 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
-      - "DatabaseSettings:ConnectionString=mongodb://guessdb:27017;DatabaseName=GuessDb"
+      - "DatabaseSettings:ConnectionString=mongodb://guessdb:27017"
+      - "DatabaseSettings:DatabaseName=GuessDb"
       - "MessagingSettings:SendNumber=+35315471763"
       - "MessagingSettings:ConnectionString=http://signal:8080"
+      - "MessagingSettings__Recipients__Rhys=+353861743488"
+      - "MessagingSettings__Recipients__Marius=+353868729411"
+      - "MessagingSettings__Recipients__Remco=+353834574638"
     ports:
       - "8000:80"
     depends_on:

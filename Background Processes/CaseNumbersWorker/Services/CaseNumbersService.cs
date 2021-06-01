@@ -36,6 +36,9 @@ namespace CaseNumbersWorker.Services
                 Thread.Sleep(timeToWait);
             }
 
+            var eventMessage = new WorkerServiceStartedEvent();
+            await _publishEndPoint.Publish(eventMessage);
+
             int count = 1;
 
             var baseUrl = "https://services1.arcgis.com/eNO7HHeQ3rUcBllm/arcgis/rest/services/";

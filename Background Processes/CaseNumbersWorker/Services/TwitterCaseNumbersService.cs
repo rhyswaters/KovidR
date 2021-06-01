@@ -39,6 +39,9 @@ namespace CaseNumbersWorker.Services
 
         public async Task PublishCaseNumbers()
         {
+            var eventMessage = new WorkerServiceStartedEvent();
+            await _publishEndPoint.Publish(eventMessage);
+
             int count = 1;
             var caseNumbersPublished = false;
             var baseUrl = "https://api.twitter.com/2/users/2195808223/tweets";

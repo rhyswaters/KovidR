@@ -6,5 +6,6 @@ namespace Guess.Domain.Entities
         public string UserName { get; set; }
         public int TotalCases { get; set; }
         public DateTime GuessDate { get; set; }
+        public DateTime? TimeStamp { get; set; }
     }
 }
