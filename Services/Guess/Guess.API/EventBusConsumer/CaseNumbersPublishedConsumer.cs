@@ -53,8 +53,8 @@ namespace Guess.API.EventBusConsumer
             }
 
             string messageText = $"KovidR results for {latestResult.Date.ToString("dd/MM/yyyy")}:\n\n{guessesForDayText}\nTotal Cases: {latestResult.CaseNumbers}\nWinner: {latestResult.Winner}";
-            var recipientsDictionary = _configuration.GetSection("MessagingSettings:Recipients").Get<Dictionary<string, string>>();
-            var message = new Message() { Recipients = recipientsDictionary.Select(x=> x.Value).ToList(), MessageText = messageText };
+            var recipients = new List<string>() { "group.ZHdyS2drWmMxMENxeGlaTGZVckg0bXpNL1hFZ3hQVjZEc2ZXNjFMSHkwdz0=" };
+            var message = new Message() { Recipients = recipients, MessageText = messageText };
             await _messageService.SendMessage(message);
         }
     }
