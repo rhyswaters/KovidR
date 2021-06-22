@@ -34,8 +34,13 @@ namespace Guess.Infrastructure.Messaging
 
                 var response = await client.SendAsync(request);
 
-                if (response.StatusCode == System.Net.HttpStatusCode.Accepted || response.StatusCode == System.Net.HttpStatusCode.OK)
+                if (response.StatusCode == System.Net.HttpStatusCode.Accepted
+                    || response.StatusCode == System.Net.HttpStatusCode.OK
+                    || response.StatusCode == System.Net.HttpStatusCode.Created)
+                {
+                    _logger.LogInformation("Signal message sending succeeded.");
                     return true;
+                }
 
                 _logger.LogError("Signal message sending failed.");
 

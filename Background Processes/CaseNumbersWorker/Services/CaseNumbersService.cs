@@ -27,15 +27,6 @@ namespace CaseNumbersWorker.Services
 
         public async Task PublishCaseNumbers()
         {
-            //this worker is set to run daily at 2pm but it will run immediately each time the container hosting it is restarted
-            //wait until 2pm to run as there is no point in spamming the arcgis server until there is a chance the case numbers have been published
-
-            if(DateTime.Now.Hour < 14)
-            {
-                var timeToWait = (DateTime.Now.Date.AddHours(14) - DateTime.Now);
-                Thread.Sleep(timeToWait);
-            }
-
             var eventMessage = new WorkerServiceStartedEvent();
             await _publishEndPoint.Publish(eventMessage);
 
@@ -132,7 +123,7 @@ namespace CaseNumbersWorker.Services
             if (hour >= 15)
                 return oneMinute * 3;
 
-            return oneMinute * 10;
+            return oneMinute * 5;
         }
     }
 }
