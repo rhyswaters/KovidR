@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using EventBus.Messages.Events;
 using MassTransit;
+using Microsoft.Extensions.Hosting;
 
 namespace CaseNumbersWorker.Services
 {
@@ -17,12 +18,14 @@ namespace CaseNumbersWorker.Services
         private readonly IHttpClientFactory _clientFactory;
         private readonly ILogger<CaseNumbersService> _logger;
         private readonly IPublishEndpoint _publishEndPoint;
+        private readonly IHostApplicationLifetime _hostApplicationLifeTime;
 
-        public CaseNumbersService(IHttpClientFactory clientFactory, ILogger<CaseNumbersService> logger, IPublishEndpoint publishEndPoint)
+        public CaseNumbersService(IHttpClientFactory clientFactory, ILogger<CaseNumbersService> logger, IPublishEndpoint publishEndPoint, IHostApplicationLifetime hostApplicationLifeTime)
         {
             _clientFactory = clientFactory;
             _logger = logger;
             _publishEndPoint = publishEndPoint;
+            _hostApplicationLifeTime = hostApplicationLifeTime;
         }
 
         public async Task PublishCaseNumbers()
@@ -47,6 +50,7 @@ namespace CaseNumbersWorker.Services
                 if (await NewCasesNumbersArePublished(baseUrl + latestDateUrl, client))
                 {
                     await CreateCaseNumbersPublishedEvent(baseUrl + casesUrl, client);
+                    _hostApplicationLifeTime.StopApplication();
                     return;
                 }
                 else
