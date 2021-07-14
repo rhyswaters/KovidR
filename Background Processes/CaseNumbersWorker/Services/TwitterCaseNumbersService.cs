@@ -50,11 +50,18 @@ namespace CaseNumbersWorker.Services
 
             while (!caseNumbersPublished)
             {
-                caseNumbersPublished = await CheckCaseNumbers(baseUrl, client);
-                _logger.LogInformation($"PublishCaseNumbers executed {count++} times");
+                try
+                {
+                    caseNumbersPublished = await CheckCaseNumbers(baseUrl, client);
+                    _logger.LogInformation($"PublishCaseNumbers executed {count++} times");
 
-                if(!caseNumbersPublished)
-                    Thread.Sleep(GetWaitTime(DateTime.Now));
+                    if (!caseNumbersPublished)
+                        Thread.Sleep(GetWaitTime(DateTime.Now));
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError($"PublishCaseNumbers exception caught: {ex.Message} {ex.StackTrace}");
+                }
             }
         }
 
@@ -69,16 +76,25 @@ namespace CaseNumbersWorker.Services
                 var content = await response.Content.ReadAsStringAsync();
                 var model = JsonConvert.DeserializeObject<TwitterResponse>(content);
                 var dateToSearchFor = DateTime.Now.AddDays(-1);
+                var daySuffix = GetDaySuffix(dateToSearchFor.Day);
 
                 var dateText1 = dateToSearchFor.ToString("dd MMMM");
                 var dateText2 = dateToSearchFor.ToString("dd MMM");
                 var dateText3 = dateToSearchFor.ToString("d MMMM");
                 var dateText4 = dateToSearchFor.ToString("d MMM");
+                var dateText5 = string.Format("{0}{1} {2:MMMM}", dateToSearchFor.Day, daySuffix, dateToSearchFor);
+                var dateText6 = string.Format("{0}{1} {2:MMM}", dateToSearchFor.Day, daySuffix, dateToSearchFor);
+                var dateText7 = string.Format("{0:dd}{1} {0:MMMM}", dateToSearchFor, daySuffix);
+                var dateText8 = string.Format("{0:dd}{1} {0:MMM}", dateToSearchFor, daySuffix);
 
                 var latestCaseTweet = model.data.Where(x => (x.text.Contains(dateText1) ||
                                                              x.text.Contains(dateText2) ||
                                                              x.text.Contains(dateText3) ||
-                                                             x.text.Contains(dateText4))
+                                                             x.text.Contains(dateText4))||
+                                                             x.text.Contains(dateText5) ||
+                                                             x.text.Contains(dateText6) ||
+                                                             x.text.Contains(dateText7) ||
+                                                             x.text.Contains(dateText8)
                                                              && x.text.Contains("confirmed cases")).OrderByDescending(y => y.id).FirstOrDefault();
 
                 if(latestCaseTweet != null)
@@ -131,6 +147,25 @@ namespace CaseNumbersWorker.Services
                 return oneMinute * 3;
 
             return oneMinute * 5;
+        }
+
+        private string GetDaySuffix(int day)
+        {
+            switch (day)
+            {
+                case 1:
+                case 21:
+                case 31:
+                    return "st";
+                case 2:
+                case 22:
+                    return "nd";
+                case 3:
+                case 23:
+                    return "rd";
+                default:
+                    return "th";
+            }
         }
     }
 }
