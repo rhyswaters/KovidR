@@ -126,7 +126,8 @@ namespace CaseNumbersWorker.Services
         private int ParseCaseNumbers(Tweet latestCaseTweet)
         {
             var text = latestCaseTweet.text.Substring(0, latestCaseTweet.text.IndexOf("confirmed cases"));
-            var resultString = Regex.Match(text, @"\d+", RegexOptions.RightToLeft).Value;
+            var resultString = Regex.Match(text, @"\d{1,}(?:\,?\d{3})*", RegexOptions.RightToLeft).Value;
+            resultString = resultString.Replace(",", "");
 
             if (resultString != null && int.TryParse(resultString, out int result))
                 return result;
