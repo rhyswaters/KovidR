@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Guess.Application.Features.Guesses.Commands.CreateGuess;
-using Guess.Application.Features.Results.GetResultsByCumulativeTotals.Queries;
+using Guess.Application.Features.Results.GetMedianGuessAccuracy.Queries;
 using Guess.Application.Features.Results.GetResultsByDaysWon.Queries;
 using Guess.Application.Features.Results.Queries.GetResultsList;
 using Guess.Application.Features.Guesses.Queries.HasUserSubmittedNextGuess;
@@ -46,12 +46,12 @@ namespace Guess.API.Controllers
             return Ok(results);
         }
 
-        [HttpGet("GetResultsByCumulativeTotals")]
+        [HttpGet("GetMedianGuessAccuracy")]
         [Authorize("read:guesses")]
         [ProducesResponseType(typeof(ResultsByDaysWonVm), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<ResultsByDaysWonVm>> GetResultsByCumulativeTotals(DateTime? from, DateTime? to)
+        public async Task<ActionResult<ResultsByDaysWonVm>> GetMedianGuessAccuracy(DateTime? from, DateTime? to)
         {
-            var query = new GetResultsByCumulativeTotalsQuery(from, to);
+            var query = new GetMedianGuessAccuracyQuery(from, to);
             var results = await _mediator.Send(query);
             return Ok(results);
         }

@@ -22,7 +22,7 @@
     <Folder Include="Features\CaseNumbers\Commands\" />
     <Folder Include="Features\CaseNumbers\Commands\CreateCaseNumbers\" />
     <Folder Include="Features\Results\Queries\GetResultsByDaysWon\" />
-    <Folder Include="Features\Results\Queries\GetResultsByCumulativeTotals\" />
+    <Folder Include="Features\Results\Queries\GetMedianGuessAccuracy\" />
     <Folder Include="Features\Results\Queries\GetResultsList\" />
     <Folder Include="Features\Guesses\Queries\" />
     <Folder Include="Features\Guesses\Queries\HasUserSubmittedNextGuess\" />
@@ -38,5 +38,9 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="5.0.0" />
+    <PackageReference Include="MathNet.Numerics" Version="4.15.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="MathNet.Numerics" />
   </ItemGroup>
 </Project>
